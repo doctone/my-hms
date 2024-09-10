@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "module": "NodeNext", // ES module output
+    "target": "ESNext", // Or ES6, depending on compatibility
+    "outDir": "./dist", // Ensure output directory is set
+    "moduleResolution": "NodeNext",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "sourceMap": true,
+    "lib": ["es2022"]
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"]
+}
