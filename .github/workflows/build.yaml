@@ -9,7 +9,7 @@ on:
 
 jobs:
   push_to_registry:
-    name: Push API image to Docker Hub
+    name: Push images to Docker Hub
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
@@ -21,7 +21,7 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build and push Docker image
+      - name: Build and push API
         uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
         with:
           context: ./api
@@ -30,4 +30,15 @@ jobs:
           tags: |
             samjamesjazz/my-hms-api:latest
             samjamesjazz/my-hms-api:${{ env.GITHUB_SHA }}
+          labels: ${{ steps.meta.outputs.labels }}
+
+      - name: Build and push Client
+        uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
+        with:
+          context: ./frontend
+          file: ./frontend/Dockerfile.vite
+          push: true
+          tags: |
+            samjamesjazz/my-hms-client:latest
+            samjamesjazz/my-hms-client:${{ env.GITHUB_SHA }}
           labels: ${{ steps.meta.outputs.labels }}
