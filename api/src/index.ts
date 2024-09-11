@@ -4,7 +4,9 @@ import bodyParser from "body-parser";
 import "dotenv/config";
 
 const app = express();
-const port = 3001;
+
+const port = process.env.PORT || 3001;
+const host = process.env.HOST || "localhost";
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -16,5 +18,5 @@ app.post("/tasks", (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Server is running on ${process.env.HOST}:${port}`);
+  console.log(`Server is running on ${host}:${port}`);
 });
