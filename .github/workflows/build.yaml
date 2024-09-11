@@ -3,10 +3,9 @@ name: Build and push images
 env:
   GITHUB_SHA: ${{github.sha}}
 on:
-  workflow_run:
-    workflows: ["Test Server"]
-    types:
-      - completed
+  push:
+    branches:
+      - main
 
 jobs:
   push_to_registry:
